@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'MainView/MainWidget.dart';
+import 'MoreView/MoreWidget.dart';
+import 'QuestionsView/QuestionsWidget.dart';
+
 class BottomNavBar extends StatefulWidget {
   @override
   State<BottomNavBar> createState() {
@@ -10,9 +14,9 @@ class BottomNavBar extends StatefulWidget {
 
 class BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _children = [
-    Center(child: Text("Main page"),),
-    Center(child: Text("Second page"),),
-    Center(child: Text("Third page"),),
+    MainWidget(),
+    QuestionsWidget(),
+    MoreWidget()
   ];
 
   @override
@@ -29,7 +33,7 @@ class BottomNavBarState extends State<BottomNavBar> {
                 icon: Icon(Icons.list),
               ),
               Tab(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.question_answer),
               ),
               Tab(
                 icon: Icon(Icons.info_outline),
