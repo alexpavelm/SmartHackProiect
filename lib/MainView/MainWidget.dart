@@ -119,19 +119,6 @@ class _MainWidgetState extends State<MainWidget> {
   }
 
   Widget getDataButton() {
-
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection("questions").snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return Center(child: CircularProgressIndicator(),);
-        globalData.questions = snapshot.data.documents;
-        globalData.questions.sort((a, b) =>
-            Chapter
-                .fromSnapshot(a)
-                .id
-                .compareTo(Chapter
-                .fromSnapshot(b)
-                .id));
         if (globalData.questions == null) {
           globalData.questions = new List();
         }
@@ -152,8 +139,7 @@ class _MainWidgetState extends State<MainWidget> {
           child: Text('Căutare'),
         );
 
-      },
-    );
+
   }
 
   void searchData(Materie materie) {
