@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,12 +13,20 @@ class GlobalData {
 
   GlobalData._internal();
 
+  int currentChapter = 1;
+  List<DocumentSnapshot> matrici;
+
   launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  String getChapterData(int chapter) {
+    var globalData = GlobalData();
+    return globalData.matrici.firstWhere((el) => el.data["id"] == globalData.currentChapter).data["text"];
   }
 
   Color getCardColor(int quality) {
