@@ -20,7 +20,7 @@ class QuestionCardState extends State<QuestionCard> {
     String text = widget.question.text;
     String username = checkUsername(widget.question.author);
     String answers = "0";
-    String time = "22/10/2019/23:21";
+    String time = widget.question.time;
     int duration = getTime(time);
 
     return Padding(
@@ -118,7 +118,7 @@ class QuestionCardState extends State<QuestionCard> {
 
   String checkUsername(String value) {
     if ((value == "") || (value == null)) {
-      return "anonymous";
+      return "anonim";
     } else {
       return value;
     }

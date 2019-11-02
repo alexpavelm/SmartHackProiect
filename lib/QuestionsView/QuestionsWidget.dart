@@ -42,10 +42,10 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
         globalData.questions = snapshot.data.documents;
         globalData.questions.sort((a, b) =>
             Chapter
-                .fromSnapshot(a)
+                .fromSnapshot(b)
                 .id
                 .compareTo(Chapter
-                .fromSnapshot(b)
+                .fromSnapshot(a)
                 .id));
         if (globalData.questions == null) {
           globalData.questions = new List();
