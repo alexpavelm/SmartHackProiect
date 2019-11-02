@@ -1,6 +1,9 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'Data/Materie.dart';
 
 class GlobalData {
 
@@ -12,12 +15,26 @@ class GlobalData {
 
   GlobalData._internal();
 
+  int currentChapter = 1;
+  List<DocumentSnapshot> matrici;
+  List<DocumentSnapshot> questions;
+  List<Materie> materii = [
+    Materie("Matematica", Icon(Icons.category)),
+    Materie("Fizica", Icon(Icons.phone_android)),
+    Materie("Chimie", Icon(Icons.border_top)),
+  ];
+
   launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  String getChapterData(int chapter) {
+    var globalData = GlobalData();
+    return globalData.matrici.firstWhere((el) => el.data["id"] == globalData.currentChapter).data["text"];
   }
 
   Color getCardColor(int quality) {

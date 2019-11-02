@@ -19,14 +19,13 @@ class QuestionCardState extends State<QuestionCard> {
     String title = widget.question.title;
     String text = widget.question.text;
     String username = widget.question.author;
-    String answers = widget.question.answers.length.toString();
+    String answers = "0";
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 4, right: 4, bottom: 1),
       child: Card(
         color: Color(0xFFFFFFFF),
         child: Container(
-          height: 120,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
-class MoreWidget extends StatefulWidget {
+import 'MainView/ChapterWidget.dart';
+
+class TestWidget extends StatefulWidget {
   @override
-  _MoreWidgetState createState() => _MoreWidgetState();
+  _TestWidgetState createState() => _TestWidgetState();
 }
 
-class _MoreWidgetState extends State<MoreWidget> {
-  @override
+class _TestWidgetState extends State<TestWidget> {
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Text("More Page"),
-      ),
+      child: ChapterWidget(),
     );
   }
 }

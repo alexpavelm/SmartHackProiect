@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TestWidget extends StatefulWidget {
+class MoreWidget extends StatefulWidget {
   @override
-  _TestWidgetState createState() => _TestWidgetState();
+  _MoreWidgetState createState() => _MoreWidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
+class _MoreWidgetState extends State<MoreWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
