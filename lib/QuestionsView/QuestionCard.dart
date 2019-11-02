@@ -37,7 +37,7 @@ class QuestionCardState extends State<QuestionCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                      width: 330,
+                      width: 300,
                       child: Text(
                         title,
                         style: TextStyle(
@@ -48,7 +48,7 @@ class QuestionCardState extends State<QuestionCard> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: new Icon(
                         Icons.help,
                         color: Colors.indigoAccent
