@@ -18,8 +18,10 @@ class QuestionCardState extends State<QuestionCard> {
   Widget build(BuildContext context) {
     String title = widget.question.title;
     String text = widget.question.text;
-    String username = widget.question.author;
+    String username = checkUsername(widget.question.author);
     String answers = "0";
+    String time = "22/10/2019/23:21";
+    int duration = getTime(time);
 
     return Padding(
       padding: const EdgeInsets.only(left: 4, right: 4, bottom: 1),
@@ -31,13 +33,28 @@ class QuestionCardState extends State<QuestionCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: "Raleway",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: 330,
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontFamily: "Raleway",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: new Icon(
+                        Icons.help,
+                        color: Colors.indigoAccent
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   color: Colors.white,
@@ -59,7 +76,7 @@ class QuestionCardState extends State<QuestionCard> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      "Intrebare pusa de: " + username,
+                      username + " acum " + duration.toString() + " zile",
                       style: TextStyle(
                         fontFamily: "Raleway",
                         fontSize: 12,
@@ -67,7 +84,7 @@ class QuestionCardState extends State<QuestionCard> {
                       )
                     ),
                     Text(
-                      answers,
+                      answers + " raspunsuri",
                         style: TextStyle(
                           fontFamily: "Raleway",
                           fontSize: 12,
@@ -79,10 +96,32 @@ class QuestionCardState extends State<QuestionCard> {
               ],
             ),
           ),
-        )
-//
+        ),
       ),
     );
+  }
+
+  int getTime(String time) {
+    List<String> tokens = time.split("/");
+    List<String> hour = tokens[3].split(":");
+
+    var now = DateTime.now();
+    var date = DateTime(
+        (int.parse(tokens[2])),
+        (int.parse(tokens[1])),
+        (int.parse(tokens[0])),
+        (int.parse(hour[0])),
+        (int.parse(hour[1])));
+
+    return now.difference(date).inDays;
+  }
+
+  String checkUsername(String value) {
+    if ((value == "") || (value == null)) {
+      return "anonymous";
+    } else {
+      return value;
+    }
   }
 
 }
