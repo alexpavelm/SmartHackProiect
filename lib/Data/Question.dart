@@ -7,7 +7,9 @@ class Question {
 
   final int id;
   final bool isAnswered;
+  final String title;
   final String text;
+  final String author;
   final String keywords;
   final String materie;
   final DocumentReference reference;
@@ -16,13 +18,17 @@ class Question {
   // Data taken from database about cities
   Question.fromMap(Map<String, dynamic> map, {this.reference})
       : assert(map['id'] != null),
+        assert(map['title'] != null),
         assert(map['text'] != null),
+        assert(map['author'] != null),
         assert(map['keywords'] != null),
         assert(map['isAnsweared'] != null),
         assert(map['materie'] != null),
 
         id = map['id'],
+        title = map['title'],
         text = map['text'],
+        author = map['author'],
         isAnswered = map['isAnswered'],
         materie = map['materie'],
         keywords = map['keywords'],
