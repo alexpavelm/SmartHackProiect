@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "870010595059",
+    "firebase_url": "https://smarthackproject.firebaseio.com",
+    "project_id": "smarthackproject",
+    "storage_bucket": "smarthackproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870010595059:android:b812c11a621b4e0a07f986",
+        "android_client_info": {
+          "package_name": "com.smarthack_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870010595059-rnmb9u4g803sksefibj49mp2ua36i8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoK5gaYvRF5akUM1m69OUZYYsK2SxfrVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870010595059-rnmb9u4g803sksefibj49mp2ua36i8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'Data/Materie.dart';
+
 class MaterieWidget extends StatefulWidget {
+  Materie materie;
+
+  MaterieWidget(this.materie);
+
   @override
   _MaterieWidgetState createState() => _MaterieWidgetState();
 }
@@ -20,9 +26,9 @@ class _MaterieWidgetState extends State<MaterieWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const ListTile(
-                  leading: Icon(Icons.category, size: 30),
-                  title: Text('Matematica', style: TextStyle(fontSize: 25)),
+                ListTile(
+                  leading: widget.materie.icon,
+                  title: Text(widget.materie.title, style: TextStyle(fontSize: 25)),
                 ),
               ],
             ),

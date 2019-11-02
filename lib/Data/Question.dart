@@ -22,7 +22,7 @@ class Question {
         assert(map['text'] != null),
         assert(map['author'] != null),
         assert(map['keywords'] != null),
-        assert(map['isAnsweared'] != null),
+        assert(map['isAnswered'] != null),
         assert(map['materie'] != null),
 
         id = map['id'],
