@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'MainView/MainWidget.dart';
 import 'MoreView/MoreWidget.dart';
 import 'QuestionsView/QuestionsWidget.dart';
+import 'TestWidget.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -15,14 +16,15 @@ class BottomNavBar extends StatefulWidget {
 class BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _children = [
     MainWidget(),
+    TestWidget(),
     QuestionsWidget(),
-    MoreWidget()
+    MoreWidget(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: new Scaffold(
@@ -31,6 +33,9 @@ class BottomNavBarState extends State<BottomNavBar> {
             tabs: [
               Tab(
                 icon: Icon(Icons.list),
+              ),
+              Tab(
+                icon: Icon(Icons.warning),
               ),
               Tab(
                 icon: Icon(Icons.question_answer),
