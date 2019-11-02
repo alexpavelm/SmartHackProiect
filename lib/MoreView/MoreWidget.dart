@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smarthack_project/Data/Materie.dart';
+
+import '../GlobalData.dart';
 
 class MoreWidget extends StatefulWidget {
   @override
@@ -7,6 +11,9 @@ class MoreWidget extends StatefulWidget {
 }
 
 class _MoreWidgetState extends State<MoreWidget> {
+
+  var globalData = GlobalData();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,7 +37,8 @@ class _MoreWidgetState extends State<MoreWidget> {
                     Text("USERNAME", style: TextStyle(fontSize: 25)),
                     Row(
                       children: <Widget>[
-                        Text("Selected answers: 15 ", style: TextStyle(fontSize: 17)),
+                        Text("Selected answers: 15 ",
+                            style: TextStyle(fontSize: 17)),
                         Icon(Icons.star, size: 20, color: Colors.yellow),
                       ],
                     )
@@ -50,11 +58,42 @@ class _MoreWidgetState extends State<MoreWidget> {
               ),
             ],
           ),
-          children: <Widget>[
-            Text('Materii urmarite', style: TextStyle(fontSize: 20)),
-          ],
+          children: buildList()
         ),
       ],
     );
   }
+
+  buildList() {
+    return globalData.subscribed.map((data) => moreWidget(data)).toList();
+  }
+
+  Widget moreWidget(Materie data) {
+    return InkWell(
+      onTap: () {
+        print("Mate");
+      },
+      child: ListTile(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(data.title, style: TextStyle(fontSize: 20)),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  globalData.subscribed.removeWhere((a) => a.title == data.title);
+                });
+              },
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.remove_circle, color: Colors.red, size: 25,),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }

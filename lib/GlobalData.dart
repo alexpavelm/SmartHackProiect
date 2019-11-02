@@ -24,6 +24,12 @@ class GlobalData {
     Materie("Chimie", Icon(Icons.border_top)),
   ];
 
+  List<Materie> subscribed = [
+    Materie("Matematica", Icon(Icons.category)),
+    Materie("Fizica", Icon(Icons.phone_android)),
+    Materie("Chimie", Icon(Icons.border_top)),
+  ];
+
   launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
