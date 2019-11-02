@@ -21,10 +21,10 @@ class QuestionCardState extends State<QuestionCard> {
     String username = checkUsername(widget.question.author);
     String answers = "0";
     String time = widget.question.time;
-    int duration = getTime(time);
+    String duration = getTime(time);
 
     return Padding(
-      padding: const EdgeInsets.only(left: 4, right: 4, bottom: 1),
+      padding: const EdgeInsets.only(left: 1, right: 1, bottom: 1),
       child: Card(
         color: Color(0xFFFFFFFF),
         child: Container(
@@ -37,7 +37,7 @@ class QuestionCardState extends State<QuestionCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                      width: 300,
+                      width: 320,
                       child: Text(
                         title,
                         style: TextStyle(
@@ -58,7 +58,7 @@ class QuestionCardState extends State<QuestionCard> {
                 ),
                 Container(
                   color: Colors.white,
-                  height: 10,
+                  height: 5,
                 ),
                 Text(
                     text,
@@ -76,7 +76,7 @@ class QuestionCardState extends State<QuestionCard> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      username + " acum " + duration.toString() + " zile",
+                      username + " acum " + duration,
                       style: TextStyle(
                         fontFamily: "Raleway",
                         fontSize: 12,
@@ -101,9 +101,10 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  int getTime(String time) {
+  String getTime(String time) {
     List<String> tokens = time.split("/");
     List<String> hour = tokens[3].split(":");
+    String my_time = "";
 
     var now = DateTime.now();
     var date = DateTime(
@@ -113,7 +114,15 @@ class QuestionCardState extends State<QuestionCard> {
         (int.parse(hour[0])),
         (int.parse(hour[1])));
 
-    return now.difference(date).inDays;
+    if (now.difference(date).inDays < 1) {
+       my_time += now.difference(date).inHours.toString();
+       my_time += " ore";
+    } else {
+      my_time += now.difference(date).inDays.toString();
+      my_time += " zile";
+    }
+
+    return my_time;
   }
 
   String checkUsername(String value) {
