@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:smarthack_project/QuestionsView/QuestionCard.dart';
 
 class TestWidget extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class _TestWidgetState extends State<TestWidget> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("Testing"),
+        child: QuestionCard(),
       ),
     );
   }
