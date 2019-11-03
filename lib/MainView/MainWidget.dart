@@ -13,7 +13,6 @@ import '../LoginPage.dart';
 import 'SearchResultWidget.dart';
 
 class MainWidget extends StatefulWidget {
-
   @override
   _MainWidgetState createState() => _MainWidgetState();
 }
@@ -43,9 +42,7 @@ class _MainWidgetState extends State<MainWidget> {
             style: TextStyle(color: Colors.white, fontFamily: 'Raleway'),
           ),
           textColor: Colors.black.withOpacity(0.6),
-          color: materieSelectata == null
-              ? Colors.grey
-              : Colors.blue.shade300,
+          color: materieSelectata == null ? Colors.grey : Colors.blue.shade300,
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0),
           ),
@@ -67,19 +64,20 @@ class _MainWidgetState extends State<MainWidget> {
                     child: TextFormField(
                       controller: myController,
                       decoration: new InputDecoration(
-                        labelText: "Caută un subiect",
-                        fillColor: Colors.white,
-                        border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 0.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
+                          labelText: "Caută un subiect",
+                          fillColor: Colors.white,
+                          border: new OutlineInputBorder(
                             borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.blue.shade300)),
-                        labelStyle: TextStyle(fontFamily: 'Raleway')
-                        //fillColor: Colors.green
-                      ),
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 0.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide:
+                                  BorderSide(color: Colors.blue.shade300)),
+                          labelStyle: TextStyle(fontFamily: 'Raleway')
+                          //fillColor: Colors.green
+                          ),
                       validator: (val) {
                         if (val.length == 0) {
                           return "Inserează un text";
@@ -97,12 +95,11 @@ class _MainWidgetState extends State<MainWidget> {
             child: getDataButton(),
           ),
         ]),
-        RaisedButton(onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginPage()));
-        },
-
+        RaisedButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
         )
       ],
     )));
@@ -126,7 +123,7 @@ class _MainWidgetState extends State<MainWidget> {
                       onTap: () {
                         setState(() {
                           materieSelectata = index;
-                            searchValid = true;
+                          searchValid = true;
                           Navigator.of(context).pop();
                         });
                       },
@@ -162,7 +159,7 @@ class _MainWidgetState extends State<MainWidget> {
       ),
       onTap: () {
         if (globalData.formKey.currentState.validate()) {
-          if(searchValid) {
+          if (searchValid) {
             FocusScope.of(context).unfocus();
             searchData(globalData.materii[materieSelectata]);
           }
@@ -202,24 +199,54 @@ class _MainWidgetState extends State<MainWidget> {
 
     Chapter chapter;
 
-    for (int i = 0; i < GlobalData().matrici.length; i++) {
-      var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
-      var keywords = capitol.keywords.split(",");
-      for (String j in keywords) {
-        if (word[pos] == j) {
-           chapter = Chapter.fromSnapshot(GlobalData().matrici[i]);
-           break;
+    if (searchKeywords.length > 1) {
+      for (int i = 0; i < GlobalData().matrici.length; i++) {
+        var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
+        var keywords = capitol.keywords.split(",");
+        for (String j in keywords) {
+          if (word[pos] == j) {
+            chapter = Chapter.fromSnapshot(GlobalData().matrici[i]);
+            break;
+          }
         }
       }
+      SearchResult searchResult = new SearchResult(
+          new TopicResult(materie.title, word[pos], chapter),
+          globalData.questions);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
+      );
+    } else if(searchKeywords.length == 1) {
+      for(int i = 0; i < GlobalData().materii.length; i++) {
+        var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
+        if(GlobalData().materii[i].title.contains(word[pos])) {
+          SearchResult searchResult = new SearchResult(
+              new TopicResult(materie.title, null, null),
+              globalData.questions);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
+          );
+        }
+        if(GlobalData().capitole[i].contains(word[pos])) {
+          SearchResult searchResult = new SearchResult(
+              new TopicResult(materie.title, GlobalData().capitole[i], null),
+              globalData.questions);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
+          );
+        }
+      }
+    } else {
+      SearchResult searchResult = new SearchResult(
+          new TopicResult(null, null, null),
+          globalData.questions);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
+      );
     }
-
-    SearchResult searchResult = new SearchResult(
-        new TopicResult(materie.title, word[pos],
-            chapter),
-        globalData.questions);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
-    );
   }
 }
