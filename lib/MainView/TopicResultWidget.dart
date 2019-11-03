@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smarthack_project/Data/Chapter.dart';
 import 'package:smarthack_project/Data/TopicResult.dart';
 import 'package:smarthack_project/GlobalData.dart';
 
@@ -24,58 +23,168 @@ class _TopicResultWidgetState extends State<TopicResultWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                child: widget.topicResult.categorieMaterie != null
-                    ? widget.topicResult.chapter != null
-                        ? Text(
-                            widget.topicResult.chapter.title + ": ",
-                            style: TextStyle(
-                                fontFamily: "Raleway",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25),
-                          )
-                        : Text(
-                            widget.topicResult.categorieMaterie + ": ",
-                            style: TextStyle(
-                                fontFamily: "Raleway",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25),
-                          )
-                    : Text(
-                        widget.topicResult.materie + ": ",
-                        style: TextStyle(
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
-              ),
-              Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    GlobalData().capitole[0] + ".",
-                    style: TextStyle(
-                        fontFamily: "Raleway",
-                        fontSize: 15),
-                  ),
-                  Text(
-                    GlobalData().capitole[1] + ".",
-                    style: TextStyle(
-                        fontFamily: "Raleway",
-                        fontSize: 15),
-                  ),
-                  Text(
-                    GlobalData().capitole[2] + ".",
-                    style: TextStyle(
-                        fontFamily: "Raleway",
-                        fontSize: 15),
-                  ),
-                  Text(
-                      "Si inca " +
-                          (GlobalData().capitole.length - 3).toString() +
-                          " capitole."
-                  )
-                ],
-              )
+                  child: widget.topicResult.categorieMaterie != null
+                      ? widget.topicResult.chapter != null
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  widget.topicResult.chapter.title,
+                                  style: TextStyle(
+                                      fontFamily: "Raleway",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                ),
+                                RaisedButton(
+                                  child: Text(
+                                    widget.topicResult.categorieMaterie,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Raleway",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
+                                  ),
+                                  textColor: Colors.black.withOpacity(0.6),
+                                  color: Colors.blue.shade300,
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(30.0),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {});
+                                  },
+                                ),
+                                RaisedButton(
+                                  child: Text(
+                                    widget.topicResult.materie,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Raleway",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
+                                  ),
+                                  textColor: Colors.black.withOpacity(0.6),
+                                  color: Colors.blue.shade300,
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(30.0),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {});
+                                  },
+                                ),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  widget.topicResult.categorieMaterie,
+                                  style: TextStyle(
+                                      fontFamily: "Raleway",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                ),
+                                RaisedButton(
+                                  child: Text(
+                                    widget.topicResult.materie,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Raleway",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
+                                  ),
+                                  textColor: Colors.black.withOpacity(0.6),
+                                  color: Colors.blue.shade300,
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(30.0),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {});
+                                  },
+                                ),
+                              ],
+                            )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Text(
+                              widget.topicResult.materie,
+                              style: TextStyle(
+                                  fontFamily: "Raleway",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
+                            ),
+                            RaisedButton(
+                              child: Text(
+                                GlobalData().capitole[0],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Raleway",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10),
+                              ),
+                              textColor: Colors.black.withOpacity(0.6),
+                              color: Colors.blue.shade300,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0),
+                              ),
+                              onPressed: () {
+                                setState(() {});
+                              },
+                            ),
+                            RaisedButton(
+                              child: Text(
+                                GlobalData().capitole[1],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Raleway",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10),
+                              ),
+                              textColor: Colors.black.withOpacity(0.6),
+                              color: Colors.blue.shade300,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0),
+                              ),
+                              onPressed: () {
+                                setState(() {});
+                              },
+                            ),
+                            RaisedButton(
+                              child: Text(
+                                GlobalData().capitole[2],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Raleway",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10),
+                              ),
+                              textColor: Colors.black.withOpacity(0.6),
+                              color: Colors.blue.shade300,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0),
+                              ),
+                              onPressed: () {
+                                setState(() {});
+                              },
+                            ),
+                            Text(
+                              "Si inca " +
+                                  (GlobalData().capitole.length - 3)
+                                      .toString() +
+                                  " capitole.",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Raleway",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10),
+                            ),
+                          ],
+                        ))
             ],
           ),
         ),
