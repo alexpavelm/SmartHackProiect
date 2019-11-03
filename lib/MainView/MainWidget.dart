@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_project/Data/Chapter.dart';
+import 'package:smarthack_project/Data/Chapter.dart' as prefix0;
 import 'package:smarthack_project/Data/Materie.dart';
 import 'package:smarthack_project/Data/SearchResult.dart';
 import 'package:smarthack_project/Data/TopicResult.dart';
@@ -22,6 +23,10 @@ class _MainWidgetState extends State<MainWidget> {
   var globalData = GlobalData();
   int materieSelectata;
   bool searchValid = false;
+  int score = 0;
+  List<String> searchKeywords = new List();
+  List<int> scores = new List();
+  List<String> word = new List();
 
   @override
   Widget build(BuildContext context) {
@@ -167,11 +172,50 @@ class _MainWidgetState extends State<MainWidget> {
   }
 
   void searchData(Materie materie) {
+    searchKeywords = myController.text.toLowerCase().split(" ");
 
+    for (int i = 0; i < GlobalData().matrici.length; i++) {
+      var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
+      var keywords = capitol.keywords.split(",");
+      for (int i = 0; i < searchKeywords.length; i++) {
+        for (int j = 1; j < keywords.length; j++) {
+          score = 0;
+          print(searchKeywords[i]);
+          print(keywords[j]);
+          print(score);
+          if (searchKeywords[i].contains(keywords[j])) {
+            score++;
+          }
+          scores.add(score);
+          word.add(keywords[j]);
+        }
+      }
+    }
+
+    var count = scores[0];
+    var pos = 0;
+    for (int i = 0; i < scores.length; i++) {
+      if (scores[i] > count) {
+        pos = i;
+      }
+    }
+
+    Chapter chapter;
+
+    for (int i = 0; i < GlobalData().matrici.length; i++) {
+      var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
+      var keywords = capitol.keywords.split(",");
+      for (String j in keywords) {
+        if (word[pos] == j) {
+           chapter = Chapter.fromSnapshot(GlobalData().matrici[i]);
+           break;
+        }
+      }
+    }
 
     SearchResult searchResult = new SearchResult(
-        new TopicResult("Matematica", "Matrici",
-            Chapter.fromSnapshot(globalData.matrici[0])),
+        new TopicResult(materie.title, word[pos],
+            chapter),
         globalData.questions);
     Navigator.push(
       context,
