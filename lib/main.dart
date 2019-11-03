@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     getData();
     return MaterialApp(
-      title: 'SmartHack Proiect ',
+      title: 'SmartHack Project ',
       theme: new ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.white,

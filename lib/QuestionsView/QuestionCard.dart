@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarthack_project/Data/Question.dart';
+import 'package:smarthack_project/QuestionsView/AnswersWidget.dart';
 
 class QuestionCard extends StatefulWidget {
   Question question;
@@ -16,6 +17,7 @@ class QuestionCard extends StatefulWidget {
 class QuestionCardState extends State<QuestionCard> {
   @override
   Widget build(BuildContext context) {
+    Question question = widget.question;
     String title = widget.question.title;
     String text = widget.question.text;
     String username = checkUsername(widget.question.author);
@@ -25,76 +27,81 @@ class QuestionCardState extends State<QuestionCard> {
 
     return Padding(
       padding: const EdgeInsets.only(left: 1, right: 1, bottom: 1),
-      child: Card(
-        color: Color(0xFFFFFFFF),
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          )
+      child: InkWell(
+        onTap: () {
+          getNewAnswer(question);
+        },
+        child: Card(
+          color: Color(0xFFFFFFFF),
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            )
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new Icon(
-                        Icons.help,
-                        color: Colors.indigoAccent
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: new Icon(
+                          Icons.help,
+                          color: Colors.indigoAccent
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                  color: Colors.white,
-                  height: 5,
-                ),
-                Text(
-                    text,
-                    style: TextStyle(
-                      fontFamily: "Raleway",
-                      fontSize: 12,
-                    )
-                ),
-                Container(
-                  color: Colors.white,
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      username + " acum " + duration,
+                    ],
+                  ),
+                  Container(
+                    color: Colors.white,
+                    height: 5,
+                  ),
+                  Text(
+                      text,
                       style: TextStyle(
-                        fontFamily: "Raleway",
+                        fontFamily: "Poppins",
                         fontSize: 12,
-                        color: Colors.grey,
                       )
-                    ),
-                    Text(
-                      answers + " raspunsuri",
+                  ),
+                  Container(
+                    color: Colors.white,
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        username + " acum " + duration,
                         style: TextStyle(
-                          fontFamily: "Raleway",
+                          fontFamily: "Poppins",
                           fontSize: 12,
                           color: Colors.grey,
                         )
-                    )
-                  ],
-                ),
-              ],
+                      ),
+                      Text(
+                        answers + " raspunsuri",
+                           style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.grey,
+                          )
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -132,6 +139,12 @@ class QuestionCardState extends State<QuestionCard> {
     } else {
       return value;
     }
+  }
+
+  void getNewAnswer(Question question){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AnswersWidget(question)));
   }
 
 }

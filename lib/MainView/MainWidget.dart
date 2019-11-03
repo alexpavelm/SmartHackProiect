@@ -57,7 +57,7 @@ class _MainWidgetState extends State<MainWidget> {
                 width: 300,
                 child: new Theme(
                     data: new ThemeData(
-                      primaryColor: Colors.blue,
+                      primaryColor: Colors.indigoAccent,
                     ),
                     child: TextFormField(
                       controller: myController,
@@ -71,7 +71,7 @@ class _MainWidgetState extends State<MainWidget> {
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.blue)),
+                            borderSide: BorderSide(color: Colors.indigoAccent)),
                         //fillColor: Colors.green
                       ),
                       validator: (val) {
@@ -145,7 +145,7 @@ class _MainWidgetState extends State<MainWidget> {
       child: Icon(
         FontAwesomeIcons.search,
         size: 30,
-        color: searchValid ? Colors.blue : Colors.grey,
+        color: searchValid ? Colors.indigoAccent : Colors.grey,
       ),
       onTap: () {
         if (MainWidget._formKey.currentState.validate()) {

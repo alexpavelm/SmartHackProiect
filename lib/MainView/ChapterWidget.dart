@@ -19,8 +19,11 @@ class _ChapterWidgetState extends State<ChapterWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Matrici",
-            style: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 28)),
-        backgroundColor: Colors.blue.shade300,
+            style: TextStyle(
+                color: Colors.black.withOpacity(0.6),
+                fontSize: 28
+            )),
+        backgroundColor: Colors.indigoAccent,
         elevation: 0,
       ),
       body: Container(
@@ -132,7 +135,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
             RaisedButton(
               child: Text("Inapoi"),
               textColor: Colors.black.withOpacity(0.6),
-              color: globalData.currentChapter == 1 ? Colors.grey : Colors.blue.shade300,
+              color: globalData.currentChapter == 1 ? Colors.grey : Colors.indigoAccent,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
@@ -147,7 +150,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
             RaisedButton(
               child: Icon(Icons.home),
               textColor: Colors.black.withOpacity(0.6),
-              color: Colors.blue.shade300,
+              color: Colors.indigoAccent,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
@@ -160,7 +163,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
             RaisedButton(
               child: Text("Inainte"),
               textColor: Colors.black.withOpacity(0.6),
-              color: globalData.currentChapter == globalData.matrici.length ? Colors.grey : Colors.blue.shade300,
+              color: globalData.currentChapter == globalData.matrici.length ? Colors.grey : Colors.indigoAccent,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
