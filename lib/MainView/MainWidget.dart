@@ -177,9 +177,6 @@ class _MainWidgetState extends State<MainWidget> {
       for (int i = 0; i < searchKeywords.length; i++) {
         for (int j = 1; j < keywords.length; j++) {
           score = 0;
-          print(searchKeywords[i]);
-          print(keywords[j]);
-          print(score);
           if (searchKeywords[i].contains(keywords[j])) {
             score++;
           }
@@ -217,21 +214,21 @@ class _MainWidgetState extends State<MainWidget> {
         context,
         MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
       );
-    } else if(searchKeywords.length == 1) {
+    } else if(searchKeywords.length >= 1) {
       for(int i = 0; i < GlobalData().materii.length; i++) {
         var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
-        if(GlobalData().materii[i].title.contains(word[pos])) {
+        if(GlobalData().materii[i].title == word[pos]) {
           SearchResult searchResult = new SearchResult(
-              new TopicResult(materie.title, null, null),
+              new TopicResult(materie.title, "", null),
               globalData.questions);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => SearchResultWidget(searchResult)),
           );
         }
-        if(GlobalData().capitole[i].contains(word[pos])) {
+        if(GlobalData().capitole[i] == word[pos]) {
           SearchResult searchResult = new SearchResult(
-              new TopicResult(materie.title, GlobalData().capitole[i], null),
+              new TopicResult(materie.title, "", capitol),
               globalData.questions);
           Navigator.push(
             context,
@@ -239,9 +236,8 @@ class _MainWidgetState extends State<MainWidget> {
           );
         }
       }
-    } else {
       SearchResult searchResult = new SearchResult(
-          new TopicResult(null, null, null),
+          new TopicResult("", "", null),
           globalData.questions);
       Navigator.push(
         context,
