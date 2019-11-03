@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Data/Materie.dart';
+import 'Data/User.dart';
 
 class GlobalData {
 
@@ -28,8 +29,12 @@ class GlobalData {
     "Diagonala",
     "Ceva"
   ];
-  final formKey = GlobalKey<FormState>();
 
+
+  final formKey = GlobalKey<FormState>();
+  User user = User("prods.alex", "https://lh3.googleusercontent.com/-o9fj8eZSuU4/W0TnC5_wgjI/AAAAAAAAA8k/iLltFozOEYU41pjfK36e1sZ97kjkcjNAgCEwYBhgL/w140-h140-p/LrMobile0205-2016-101816748366391193.jpeg", "SmartHack User");
+
+  bool isLoggedIn = false;
   GoogleSignInAccount currentUser;
 
 
