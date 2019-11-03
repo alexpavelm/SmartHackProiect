@@ -21,7 +21,7 @@ class _MoreWidgetState extends State<MoreWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          color: Colors.grey,
+          color: Colors.blue.shade300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

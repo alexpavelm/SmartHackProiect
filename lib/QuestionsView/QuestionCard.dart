@@ -22,7 +22,7 @@ class QuestionCardState extends State<QuestionCard> {
     String title = widget.question.title;
     String text = widget.question.text;
     String username = checkUsername(widget.question.author);
-    String answers = "0";
+    String answers = widget.question.answersN.toString();
     String time = widget.question.time;
     String duration = getTime(time);
 

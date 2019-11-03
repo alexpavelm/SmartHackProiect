@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_project/Data/Answer.dart';
 import 'package:smarthack_project/Data/Question.dart';
 import 'package:smarthack_project/QuestionsView/QuestionCard.dart';
@@ -70,56 +71,70 @@ class _AnswersWidgetState extends State<AnswersWidget> {
       child: Container(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      answer.id == 0 ? Text("Răspuns ales", style: TextStyle(fontSize: 10, color: Colors.grey),) : SizedBox.shrink(),
-                      Container(
-                        child: Text(
-                          text,
-                          style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          answer.id == 0 ? Row(
+                            children: <Widget>[
+                              Text("Răspuns ales", style: TextStyle(fontSize: 12, color: Colors.grey),),
+                              Icon(FontAwesomeIcons.check, color: Colors.green, size: 12,)
+                            ],
+                          ) : SizedBox.shrink(),
+                          Container(
+                            width: 350,
+                            child: Text(
+                              text,
+                              style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15
+                              ),
+                              maxLines: 3,
+                            ),
                           ),
+                        ],
+                      ),
+
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "acum " + duration,
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 12,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
                   ),
-                  Column(
-                    children: <Widget>[
-                      Image.network(
-                        "https://qwr.ro/J7Rw",
-                        scale: 8,
-                      ),
-                      Text(
-                          author,
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 10
-                          )
-                      )
-                    ],
-                  ),
-
                 ],
               ),
-              Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "acum " + duration,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage("https://qwr.ro/J7Rw",),
                   ),
+                  Text(
+                      author,
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 10
+                      )
+                  )
                 ],
               ),
             ],
