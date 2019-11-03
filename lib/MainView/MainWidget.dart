@@ -1,8 +1,11 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_project/Data/Chapter.dart';
+import 'package:smarthack_project/Data/Chapter.dart' as prefix0;
 import 'package:smarthack_project/Data/Materie.dart';
 import 'package:smarthack_project/Data/SearchResult.dart';
 import 'package:smarthack_project/Data/TopicResult.dart';
@@ -22,6 +25,10 @@ class _MainWidgetState extends State<MainWidget> {
   var globalData = GlobalData();
   int materieSelectata;
   bool searchValid = false;
+  int score;
+  List<String> searchKeywords;
+  List<int> scores;
+  List<String> word;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +45,7 @@ class _MainWidgetState extends State<MainWidget> {
             style: TextStyle(color: Colors.white),
           ),
           textColor: Colors.black.withOpacity(0.6),
-          color: materieSelectata == null
-              ? Colors.grey
-              : Colors.blue.shade300,
+          color: materieSelectata == null ? Colors.grey : Colors.blue.shade300,
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0),
           ),
@@ -113,7 +118,7 @@ class _MainWidgetState extends State<MainWidget> {
                       onTap: () {
                         setState(() {
                           materieSelectata = index;
-                            searchValid = true;
+                          searchValid = true;
                           Navigator.of(context).pop();
                         });
                       },
@@ -149,7 +154,7 @@ class _MainWidgetState extends State<MainWidget> {
       ),
       onTap: () {
         if (MainWidget._formKey.currentState.validate()) {
-          if(searchValid) {
+          if (searchValid) {
             FocusScope.of(context).unfocus();
             searchData(globalData.materii[materieSelectata]);
           }
@@ -159,9 +164,46 @@ class _MainWidgetState extends State<MainWidget> {
   }
 
   void searchData(Materie materie) {
+    searchKeywords = myController.toString().toLowerCase().split(" ");
+
+    for (int i = 0; i < GlobalData().matrici.length; i++) {
+      var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
+      var keywords = capitol.keywords.split(",");
+      for (String i in searchKeywords) {
+        for (String j in keywords) {
+          if (i == j) {
+            score++;
+          }
+          scores.add(score);
+          word.add(j);
+        }
+      }
+    }
+
+    var count = scores[0];
+    var pos = 0;
+    for (int i = 0; i < scores.length; i++) {
+      if (scores[i] > count) {
+        pos = i;
+      }
+    }
+
+    Chapter chapter;
+
+    for (int i = 0; i < GlobalData().matrici.length; i++) {
+      var capitol = Chapter.fromSnapshot(GlobalData().matrici[i]);
+      var keywords = capitol.keywords.split(",");
+      for (String j in keywords) {
+        if (word[pos] == j) {
+           chapter = Chapter.fromSnapshot(GlobalData().matrici[i]);
+           break;
+        }
+      }
+    }
+
     SearchResult searchResult = new SearchResult(
-        new TopicResult("Matematica", "Matrici",
-            Chapter.fromSnapshot(globalData.matrici[0])),
+        new TopicResult(materie.title, word[pos],
+            chapter),
         globalData.questions);
     Navigator.push(
       context,
