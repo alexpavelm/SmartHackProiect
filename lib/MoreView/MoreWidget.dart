@@ -22,29 +22,91 @@ class _MoreWidgetState extends State<MoreWidget> {
       children: <Widget>[
         Container(
           color: Colors.white,
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.account_circle, size: 100),
-              ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text("USERNAME", style: TextStyle(fontSize: 25)),
-                    Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(Icons.account_circle, size: 100),
+                  ),
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text("Selected answers: 15 ",
-                            style: TextStyle(fontSize: 17)),
-                        Icon(Icons.star, size: 20, color: Colors.yellow),
+                        Text("USERNAME", style: TextStyle(fontSize: 25)),
+                        Row(
+                          children: <Widget>[
+                            Text("Selected answers: 15 ",
+                                style: TextStyle(fontSize: 17)),
+                            Icon(Icons.star, size: 20, color: Colors.yellow),
+                          ],
+                        )
                       ],
-                    )
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Sunt clasa a 7-a, imi place matematica!", style: TextStyle(fontSize: 20))
                   ],
                 ),
               )
+            ],
+          )
+        ),
+        InkWell(
+
+          onTap: () {
+
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(Icons.assignment, size: 25),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text('Schimba statusul', style: TextStyle(fontSize: 20)),
+              ),
+            ],
+          ),
+        ),
+        InkWell(
+
+          onTap: () {
+
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(Icons.mail, size: 25),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text('Schimba adresa de email', style: TextStyle(fontSize: 20)),
+              ),
+            ],
+          ),
+        ),
+        InkWell(
+
+          onTap: () {
+
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(Icons.lock, size: 25),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text('Schimba parola', style: TextStyle(fontSize: 20)),
+              ),
             ],
           ),
         ),
@@ -77,7 +139,15 @@ class _MoreWidgetState extends State<MoreWidget> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(data.title, style: TextStyle(fontSize: 20)),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: data.icon,
+                ),
+                Text(data.title, style: TextStyle(fontSize: 20)),
+              ],
+            ),
             InkWell(
               onTap: () {
                 setState(() {
