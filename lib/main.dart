@@ -31,7 +31,6 @@ getData() async {
     var data = await Firestore.instance.collection("questions").getDocuments();
     globalData.questions = data.documents;
     var data2 = await Firestore.instance.collection("data/matematica/matrici").getDocuments();
-    globalData.matrici = data2.documents;
-
+    globalData.chapters.putIfAbsent("matrici", () => data2.documents);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarthack_project/Data/Question.dart';
 import 'package:smarthack_project/Data/SearchResult.dart';
+import 'package:smarthack_project/MainView/TopicResultWidget.dart';
 import 'package:smarthack_project/QuestionsView/QuestionCard.dart';
 
 class SearchResultWidget extends StatefulWidget {
@@ -21,11 +22,10 @@ class _SearchResultWidgetState extends State<SearchResultWidget> {
         child: Center(
           child: ListView(
             children: <Widget>[
-              Text(widget.searchResult.topicResult.materie),
+              TopicResultWidget(widget.searchResult.topicResult),
               Column(
                 children: widget.searchResult.questions.map((data) => QuestionCard(Question.fromSnapshot(data))).toList(),
               ),
-
             ],
           ),
         ),

@@ -36,15 +36,16 @@ class QuestionCardState extends State<QuestionCard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Container(
-                      width: 300,
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontFamily: "Raleway",
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        )
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontFamily: "Raleway",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          )
+                        ),
                       ),
                     ),
                     Padding(

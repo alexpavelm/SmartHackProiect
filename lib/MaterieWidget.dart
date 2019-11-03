@@ -15,26 +15,23 @@ class MaterieWidget extends StatefulWidget {
 class _MaterieWidgetState extends State<MaterieWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        InkWell(
-          onTap: () {
-
-          },
-          child: Card(
-            color: Colors.white,
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Container(
+            color: Colors.blue.shade300,
+            height: 200,
+            child: Center(child: Text(widget.materie.title, style: TextStyle(fontSize: 35, color: Colors.white),),),
+          ),
+          Container(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                ListTile(
-                  leading: widget.materie.icon,
-                  title: Text(widget.materie.title, style: TextStyle(fontSize: 25)),
-                ),
+
               ],
             ),
-          ),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 }

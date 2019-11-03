@@ -8,6 +8,7 @@ import 'package:smarthack_project/Data/SearchResult.dart';
 import 'package:smarthack_project/Data/TopicResult.dart';
 
 import '../GlobalData.dart';
+import '../MaterieWidget.dart';
 import 'SearchResultWidget.dart';
 
 class MainWidget extends StatefulWidget {
@@ -38,9 +39,7 @@ class _MainWidgetState extends State<MainWidget> {
             style: TextStyle(color: Colors.white),
           ),
           textColor: Colors.black.withOpacity(0.6),
-          color: materieSelectata == null
-              ? Colors.grey
-              : Colors.blue.shade300,
+          color: materieSelectata == null ? Colors.grey : Colors.blue.shade300,
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0),
           ),
@@ -91,8 +90,85 @@ class _MainWidgetState extends State<MainWidget> {
             child: getDataButton(),
           ),
         ]),
+        Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Center(
+            child: Text(
+              "sau poți alege o materie din listă:",
+              style: TextStyle(fontSize: 20, color: Colors.grey),
+            ),
+          ),
+        ),
+        Column(
+          children: buildList(),
+        )
       ],
     )));
+  }
+
+  buildList() {
+    return globalData.materii.map((data) => moreWidget(data)).toList();
+  }
+
+  Widget moreWidget(Materie data) {
+    return Card(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MaterieWidget(data)),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    data.icon,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(data.title,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: "Poppins",
+                          )),
+                    ),
+                  ],
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (globalData.subscribed.contains(data)) {
+                        globalData.subscribed
+                            .removeWhere((a) => a.title == data.title);
+                      } else {
+                        globalData.subscribed.add(data);
+                      }
+                    });
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        globalData.subscribed.contains(data)
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: globalData.subscribed.contains(data)
+                            ? Colors.red
+                            : Colors.grey,
+                        size: 25,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Future listMaterii() {
@@ -113,7 +189,7 @@ class _MainWidgetState extends State<MainWidget> {
                       onTap: () {
                         setState(() {
                           materieSelectata = index;
-                            searchValid = true;
+                          searchValid = true;
                           Navigator.of(context).pop();
                         });
                       },
@@ -149,7 +225,7 @@ class _MainWidgetState extends State<MainWidget> {
       ),
       onTap: () {
         if (MainWidget._formKey.currentState.validate()) {
-          if(searchValid) {
+          if (searchValid) {
             FocusScope.of(context).unfocus();
             searchData(globalData.materii[materieSelectata]);
           }
@@ -161,7 +237,7 @@ class _MainWidgetState extends State<MainWidget> {
   void searchData(Materie materie) {
     SearchResult searchResult = new SearchResult(
         new TopicResult("Matematica", "Matrici",
-            Chapter.fromSnapshot(globalData.matrici[0])),
+            Chapter.fromSnapshot(globalData.chapters["matrici"][0])),
         globalData.questions);
     Navigator.push(
       context,
