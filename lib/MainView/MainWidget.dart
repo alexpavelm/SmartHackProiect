@@ -8,10 +8,10 @@ import 'package:smarthack_project/Data/SearchResult.dart';
 import 'package:smarthack_project/Data/TopicResult.dart';
 
 import '../GlobalData.dart';
+import '../LoginPage.dart';
 import 'SearchResultWidget.dart';
 
 class MainWidget extends StatefulWidget {
-  static final _formKey = GlobalKey<FormState>();
 
   @override
   _MainWidgetState createState() => _MainWidgetState();
@@ -35,7 +35,7 @@ class _MainWidgetState extends State<MainWidget> {
             materieSelectata == null
                 ? "Selectează materia"
                 : globalData.materii[materieSelectata].title,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontFamily: 'Raleway'),
           ),
           textColor: Colors.black.withOpacity(0.6),
           color: materieSelectata == null
@@ -52,12 +52,12 @@ class _MainWidgetState extends State<MainWidget> {
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Form(
-            key: MainWidget._formKey,
+            key: globalData.formKey,
             child: Container(
                 width: 300,
                 child: new Theme(
                     data: new ThemeData(
-                      primaryColor: Colors.indigoAccent,
+                      primaryColor: Colors.blue.shade300,
                     ),
                     child: TextFormField(
                       controller: myController,
@@ -71,7 +71,8 @@ class _MainWidgetState extends State<MainWidget> {
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.indigoAccent)),
+                            borderSide: BorderSide(color: Colors.blue.shade300)),
+                        labelStyle: TextStyle(fontFamily: 'Raleway')
                         //fillColor: Colors.green
                       ),
                       validator: (val) {
@@ -91,6 +92,13 @@ class _MainWidgetState extends State<MainWidget> {
             child: getDataButton(),
           ),
         ]),
+        RaisedButton(onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()));
+        },
+
+        )
       ],
     )));
   }
@@ -145,10 +153,10 @@ class _MainWidgetState extends State<MainWidget> {
       child: Icon(
         FontAwesomeIcons.search,
         size: 30,
-        color: searchValid ? Colors.indigoAccent : Colors.grey,
+        color: searchValid ? Colors.blue.shade300 : Colors.grey,
       ),
       onTap: () {
-        if (MainWidget._formKey.currentState.validate()) {
+        if (globalData.formKey.currentState.validate()) {
           if(searchValid) {
             FocusScope.of(context).unfocus();
             searchData(globalData.materii[materieSelectata]);
@@ -159,6 +167,8 @@ class _MainWidgetState extends State<MainWidget> {
   }
 
   void searchData(Materie materie) {
+
+
     SearchResult searchResult = new SearchResult(
         new TopicResult("Matematica", "Matrici",
             Chapter.fromSnapshot(globalData.matrici[0])),

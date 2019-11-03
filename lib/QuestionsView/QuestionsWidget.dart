@@ -20,7 +20,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
       appBar: AppBar(
         title: Center(
           child: Text("Întrebări",
-              style: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 28)),
+              style: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 28, fontFamily: 'Raleway')),
         ),
         backgroundColor: Colors.blue.shade300,
         elevation: 0,

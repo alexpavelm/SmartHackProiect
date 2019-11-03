@@ -21,9 +21,9 @@ class _ChapterWidgetState extends State<ChapterWidget> {
         title: Text("Matrici",
             style: TextStyle(
                 color: Colors.black.withOpacity(0.6),
-                fontSize: 28
+                fontSize: 28, fontFamily: 'Raleway'
             )),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.blue.shade300,
         elevation: 0,
       ),
       body: Container(
@@ -87,7 +87,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
                         style: TextStyle(fontWeight: globalData.currentChapter == chapter.id
                             ? FontWeight.bold : FontWeight.normal,
                             fontSize: globalData.currentChapter == chapter.id ? 16 : 14,
-                            color: globalData.currentChapter == chapter.id ? Colors.black : Colors.grey),
+                            color: globalData.currentChapter == chapter.id ? Colors.black : Colors.grey, fontFamily: 'Raleway'),
                       ),
                     ),
                   ),
@@ -133,9 +133,9 @@ class _ChapterWidgetState extends State<ChapterWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             RaisedButton(
-              child: Text("Inapoi"),
+              child: Text("Inapoi", style: TextStyle(fontFamily: 'Raleway'),),
               textColor: Colors.black.withOpacity(0.6),
-              color: globalData.currentChapter == 1 ? Colors.grey : Colors.indigoAccent,
+              color: globalData.currentChapter == 1 ? Colors.grey : Colors.blue.shade300,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
@@ -150,7 +150,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
             RaisedButton(
               child: Icon(Icons.home),
               textColor: Colors.black.withOpacity(0.6),
-              color: Colors.indigoAccent,
+              color: Colors.blue.shade300,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
@@ -161,9 +161,9 @@ class _ChapterWidgetState extends State<ChapterWidget> {
               },
             ),
             RaisedButton(
-              child: Text("Inainte"),
+              child: Text("Inainte", style: TextStyle(fontFamily: 'Raleway'),),
               textColor: Colors.black.withOpacity(0.6),
-              color: globalData.currentChapter == globalData.matrici.length ? Colors.grey : Colors.indigoAccent,
+              color: globalData.currentChapter == globalData.matrici.length ? Colors.grey : Colors.blue.shade300,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
