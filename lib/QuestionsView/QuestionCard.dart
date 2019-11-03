@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_project/Data/Question.dart';
 import 'package:smarthack_project/QuestionsView/AnswersWidget.dart';
 
@@ -32,77 +33,91 @@ class QuestionCardState extends State<QuestionCard> {
           getNewAnswer(question);
         },
         child: Card(
-          color: Color(0xFFFFFFFF),
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Row(
+            children: <Widget>[
+              Container(
+              width: 50,
+            child: Icon(widget.question.isAnswered ? FontAwesomeIcons.check : FontAwesomeIcons.question,
+            color: widget.question.isAnswered ? Colors.green : Colors.orange),
+          ),
+              Container(
+                width: 395,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          child: Text(
-                            title,
-                            style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                title,
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                )
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new Icon(
-                          Icons.help,
-                          color: Colors.indigoAccent
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: 5,
-                  ),
-                  Text(
-                      text,
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 12,
-                      )
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        username + " acum " + duration,
-                        style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 12,
-                          color: Colors.grey,
-                        )
+                      Container(
+                        color: Colors.white,
+                        height: 5,
                       ),
                       Text(
-                        answers + " raspunsuri",
-                           style: TextStyle(
-                            fontFamily: "Poppins",
+                          text,
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
                             fontSize: 12,
-                            color: Colors.grey,
                           )
-                      )
+                      ),
+                      Container(
+                        color: Colors.white,
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 2),
+                                child: Icon(
+                                  Icons.account_circle,
+                                  color: Colors.grey,
+                                  size: 25,
+                                ),
+                              ),
+                              Text(
+                                username + " acum " + duration,
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                )
+                              ),
+                            ],
+                          ),
+                          Text(
+                            answers + " raspunsuri",
+                               style: TextStyle(
+                                 fontFamily: 'Raleway',
+                                fontSize: 12,
+                                color: Colors.grey,
+                              )
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

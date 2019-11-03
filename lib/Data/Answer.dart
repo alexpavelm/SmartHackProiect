@@ -7,6 +7,7 @@ class Answer {
   final int id;
   final String text;
   final String author;
+  final String time;
   final DocumentReference reference;
 
   // Data taken from database about cities
@@ -14,9 +15,11 @@ class Answer {
       : assert(map['id'] != null),
         assert(map['text'] != null),
         assert(map['author'] != null),
+        assert(map['time'] != null),
 
         id = map['id'],
         author = map['author'],
+        time = map['time'],
         text = map['text'];
 
   Answer.fromSnapshot(DocumentSnapshot snapshot)
