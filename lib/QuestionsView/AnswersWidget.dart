@@ -42,6 +42,10 @@ class AnswersWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                         TextField(),
+                        ButtonBar(
+                          children: <Widget>[
+                          ],
+                        )
                       ],
                     ),
                   ),
