@@ -4,10 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Answer {
 
-  final int id;
+  int id;
   final String text;
   final String author;
   final String time;
+  final String icon;
   final DocumentReference reference;
 
   // Data taken from database about cities
@@ -20,6 +21,7 @@ class Answer {
         id = map['id'],
         author = map['author'],
         time = map['time'],
+        icon = map['icon'],
         text = map['text'];
 
   Answer.fromSnapshot(DocumentSnapshot snapshot)

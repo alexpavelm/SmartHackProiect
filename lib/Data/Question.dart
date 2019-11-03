@@ -13,6 +13,7 @@ class Question {
   final String keywords;
   final String materie;
   final String time;
+  final String icon;
   final int answersN;
   final DocumentReference reference;
   List<Answer> answers;
@@ -27,6 +28,7 @@ class Question {
         assert(map['isAnswered'] != null),
         assert(map['materie'] != null),
         assert(map['time'] != null),
+        assert(map['icon'] != null),
         assert(map['answers'] != null),
 
 
@@ -36,6 +38,7 @@ class Question {
         title = map['title'],
         text = map['text'],
         author = map['author'],
+        icon = map['icon'],
         isAnswered = map['isAnswered'],
         materie = map['materie'],
         keywords = map['keywords'],

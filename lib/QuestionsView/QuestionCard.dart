@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_project/Data/Question.dart';
 import 'package:smarthack_project/QuestionsView/AnswersWidget.dart';
 
+import '../GlobalData.dart';
+
 class QuestionCard extends StatefulWidget {
   Question question;
 
@@ -16,6 +18,7 @@ class QuestionCard extends StatefulWidget {
 }
 
 class QuestionCardState extends State<QuestionCard> {
+  var globalData =GlobalData();
   @override
   Widget build(BuildContext context) {
     Question question = widget.question;
@@ -36,10 +39,15 @@ class QuestionCardState extends State<QuestionCard> {
           child: Row(
             children: <Widget>[
               Container(
-              width: 50,
-            child: Icon(widget.question.isAnswered ? FontAwesomeIcons.check : FontAwesomeIcons.question,
-            color: widget.question.isAnswered ? Colors.green : Colors.orange),
-          ),
+                width: 50,
+                child: Icon(
+                    widget.question.isAnswered
+                        ? FontAwesomeIcons.check
+                        : FontAwesomeIcons.question,
+                    color: widget.question.isAnswered
+                        ? Colors.green
+                        : Colors.orange),
+              ),
               Container(
                 width: 395,
                 child: Padding(
@@ -52,29 +60,43 @@ class QuestionCardState extends State<QuestionCard> {
                         children: <Widget>[
                           Expanded(
                             child: Container(
-                              child: Text(
-                                title,
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                )
+                              child: Text(title,
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  )),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Container(
+                              height: 21,
+                              width: 84,
+                              child: RaisedButton(
+                                child: Text(
+                                  widget.question.materie,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Raleway',
+                                      fontSize: 9),
+                                ),
+                                textColor: Colors.white,
+                                color: Colors.blue.shade300,
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(15.0),
+                                ),
+                                onPressed: () {},
                               ),
                             ),
                           ),
                         ],
                       ),
-                      Container(
-                        color: Colors.white,
-                        height: 5,
-                      ),
-                      Text(
-                          text,
+                      Text(text,
                           style: TextStyle(
                             fontFamily: 'Raleway',
                             fontSize: 12,
-                          )
-                      ),
+                          )),
                       Container(
                         color: Colors.white,
                         height: 10,
@@ -87,30 +109,31 @@ class QuestionCardState extends State<QuestionCard> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: Icon(
-                                  Icons.account_circle,
-                                  color: Colors.grey,
-                                  size: 25,
+                                child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundImage: NetworkImage(
+                                      widget.question.icon,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              Text(
-                                username + " acum " + duration,
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                )
-                              ),
+                              Text(username + " acum " + duration,
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  )),
                             ],
                           ),
-                          Text(
-                            answers + " raspunsuri",
-                               style: TextStyle(
-                                 fontFamily: 'Raleway',
+                          Text(answers + " raspunsuri",
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                 fontSize: 12,
                                 color: Colors.grey,
-                              )
-                          )
+                              ))
                         ],
                       ),
                     ],
@@ -130,16 +153,12 @@ class QuestionCardState extends State<QuestionCard> {
     String my_time = "";
 
     var now = DateTime.now();
-    var date = DateTime(
-        (int.parse(tokens[2])),
-        (int.parse(tokens[1])),
-        (int.parse(tokens[0])),
-        (int.parse(hour[0])),
-        (int.parse(hour[1])));
+    var date = DateTime((int.parse(tokens[2])), (int.parse(tokens[1])),
+        (int.parse(tokens[0])), (int.parse(hour[0])), (int.parse(hour[1])));
 
     if (now.difference(date).inDays < 1) {
-       my_time += now.difference(date).inHours.toString();
-       my_time += " ore";
+      my_time += now.difference(date).inHours.toString();
+      my_time += " ore";
     } else {
       my_time += now.difference(date).inDays.toString();
       my_time += " zile";
@@ -156,10 +175,8 @@ class QuestionCardState extends State<QuestionCard> {
     }
   }
 
-  void getNewAnswer(Question question){
-    Navigator.push(
-        context,
+  void getNewAnswer(Question question) {
+    Navigator.push(context,
         MaterialPageRoute(builder: (context) => AnswersWidget(question)));
   }
-
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_project/Data/Materie.dart';
 
 import '../GlobalData.dart';
@@ -22,44 +23,57 @@ class _MoreWidgetState extends State<MoreWidget> {
       children: <Widget>[
         Container(
           color: Colors.blue.shade300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.account_circle, size: 100),
-                  ),
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text("USERNAME", style: TextStyle(fontSize: 25, fontFamily: 'Raleway', color: Colors.white)),
-                        Row(
-                          children: <Widget>[
-                            Text("Selected answers: 15 ",
-                                style: TextStyle(fontSize: 15, fontFamily: 'Raleway', color: Colors.white)),
-                            Icon(Icons.star, size: 20, color: Colors.yellow),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50.0, left: 25, right: 25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text("Sunt clasa a 7-a, imi place matematica!", style: TextStyle(fontSize: 20, fontFamily: 'Raleway', color: Colors.white))
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(
+                          globalData.user.icon,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(globalData.user.author, style: TextStyle(fontSize: 25, fontFamily: 'Raleway', color: Colors.white)),
+                          Row(
+                            children: <Widget>[
+                              Text("Selected answers: 15 ",
+                                  style: TextStyle(fontSize: 15, fontFamily: 'Raleway', color: Colors.white)),
+                              Icon(Icons.star, size: 20, color: Colors.yellow),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(FontAwesomeIcons.angleDoubleLeft, color: Colors.white,),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("SmartHack rocks!", style: TextStyle(fontSize: 20, fontFamily: 'Raleway', color: Colors.white)),
+                      ),
+                      Icon(FontAwesomeIcons.angleDoubleRight, color: Colors.white,),
+                    ],
+                  ),
+                )
+              ],
+            ),
           )
         ),
         ExpansionTile(
@@ -88,7 +102,7 @@ class _MoreWidgetState extends State<MoreWidget> {
         ListTile(
           title: Row(
             children: <Widget>[
-              Icon(Icons.assignment, size: 25),
+              Icon(Icons.lightbulb_outline, size: 25),
               Text('Temă aplicație', style: TextStyle(fontSize: 20, fontFamily: 'Raleway')),
             ],
           ),
