@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class GlobalData {
   GlobalData._internal();
 
   int currentChapter = 1;
-  List<DocumentSnapshot> matrici;
+  HashMap<String, List<DocumentSnapshot>> chapters = new HashMap();
   List<DocumentSnapshot> questions;
   List<Materie> materii = [
     Materie("Matematica", Icon(Icons.category)),
@@ -38,9 +39,9 @@ class GlobalData {
     }
   }
 
-  String getChapterData(int chapter) {
+  String getChapterData(String topic) {
     var globalData = GlobalData();
-    return globalData.matrici.firstWhere((el) => el.data["id"] == globalData.currentChapter).data["text"];
+    return globalData.chapters[topic].firstWhere((el) => el.data["id"] == globalData.currentChapter).data["text"];
   }
 
   Color getCardColor(int quality) {
