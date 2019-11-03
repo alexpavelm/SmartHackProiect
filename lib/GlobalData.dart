@@ -19,6 +19,14 @@ class GlobalData {
   int currentChapter = 1;
   HashMap<String, List<DocumentSnapshot>> chapters = new HashMap();
   List<DocumentSnapshot> questions;
+  List<String> capitole = [
+    "Diagonalizarea matricei",
+    "Operatii cu matrice",
+    "Inmultirea matricei",
+    "Diagonala",
+    "Ceva"
+  ];
+
   List<Materie> materii = [
     Materie("Matematica", Icon(Icons.category)),
     Materie("Fizica", Icon(Icons.phone_android)),

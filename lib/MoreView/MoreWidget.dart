@@ -51,7 +51,7 @@ class _MoreWidgetState extends State<MoreWidget> {
         ExpansionTile(
           title: Row(
             children: <Widget>[
-              Icon(Icons.category, size: 30),
+              Icon(Icons.bookmark, size: 30),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text('Materii urmarite', style: TextStyle(fontSize: 20)),
