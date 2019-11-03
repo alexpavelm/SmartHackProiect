@@ -1,7 +1,8 @@
-import 'dart:collection';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Data/Materie.dart';
@@ -17,7 +18,7 @@ class GlobalData {
   GlobalData._internal();
 
   int currentChapter = 1;
-  HashMap<String, List<DocumentSnapshot>> chapters = new HashMap();
+  List<DocumentSnapshot> matrici;
   List<DocumentSnapshot> questions;
   List<String> capitole = [
     "Diagonalizarea matricei",
@@ -26,17 +27,18 @@ class GlobalData {
     "Diagonala",
     "Ceva"
   ];
+  final formKey = GlobalKey<FormState>();
+
+  GoogleSignInAccount currentUser;
+
 
   List<Materie> materii = [
-    Materie("Matematica", Icon(Icons.category)),
-    Materie("Fizica", Icon(Icons.phone_android)),
+    Materie("Matematică", Icon(Icons.category)),
+    Materie("Fizică", Icon(Icons.phone_android)),
     Materie("Chimie", Icon(Icons.border_top)),
   ];
 
   List<Materie> subscribed = [
-    Materie("Matematica", Icon(Icons.category)),
-    Materie("Fizica", Icon(Icons.phone_android)),
-    Materie("Chimie", Icon(Icons.border_top)),
   ];
 
   launchURL(String url) async {
@@ -47,9 +49,9 @@ class GlobalData {
     }
   }
 
-  String getChapterData(String topic) {
+  String getChapterData(int chapter) {
     var globalData = GlobalData();
-    return globalData.chapters[topic].firstWhere((el) => el.data["id"] == globalData.currentChapter).data["text"];
+    return globalData.matrici.firstWhere((el) => el.data["id"] == globalData.currentChapter).data["text"];
   }
 
   Color getCardColor(int quality) {

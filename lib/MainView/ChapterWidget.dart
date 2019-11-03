@@ -7,11 +7,6 @@ import 'package:smarthack_project/Data/Chapter.dart';
 import '../GlobalData.dart';
 
 class ChapterWidget extends StatefulWidget {
-  Chapter chapter;
-  String materie;
-
-  ChapterWidget(this.chapter, this.materie);
-
   @override
   _ChapterWidgetState createState() => _ChapterWidgetState();
 }
@@ -23,8 +18,11 @@ class _ChapterWidgetState extends State<ChapterWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.chapter.title,
-            style: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 28)),
+        title: Text("Matrici",
+            style: TextStyle(
+                color: Colors.black.withOpacity(0.6),
+                fontSize: 28, fontFamily: 'Raleway'
+            )),
         backgroundColor: Colors.blue.shade300,
         elevation: 0,
       ),
@@ -39,19 +37,19 @@ class _ChapterWidgetState extends State<ChapterWidget> {
 
   Widget getData() {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection("data/" + widget.materie.toLowerCase() + "/" + widget.chapter.title.toLowerCase()).snapshots(),
+      stream: Firestore.instance.collection("data/matematica/matrici").snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Center(child: CircularProgressIndicator(),);
-        globalData.chapters[widget.chapter.title] = snapshot.data.documents;
-        globalData.chapters[widget.chapter.title].sort((a, b) =>
+        globalData.matrici = snapshot.data.documents;
+        globalData.matrici.sort((a, b) =>
             Chapter
                 .fromSnapshot(a)
                 .id
                 .compareTo(Chapter
                 .fromSnapshot(b)
                 .id));
-        if (globalData.chapters[widget.chapter.title] == null) {
-          globalData.chapters[widget.chapter.title] = new List();
+        if (globalData.matrici == null) {
+          globalData.matrici = new List();
         }
         return buildList();
       },
@@ -62,9 +60,9 @@ class _ChapterWidgetState extends State<ChapterWidget> {
     return ListView(
       children: <Widget>[
         Column(
-          children: globalData.chapters[widget.chapter.title].map((data) => cuprinsWidget(data)).toList(),
+          children: globalData.matrici.map((data) => cuprinsWidget(data)).toList(),
         ),
-        htmlTextWidget(widget.chapter.text),
+        htmlTextWidget(),
         chapterControlWidget()
       ],
     );
@@ -89,7 +87,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
                         style: TextStyle(fontWeight: globalData.currentChapter == chapter.id
                             ? FontWeight.bold : FontWeight.normal,
                             fontSize: globalData.currentChapter == chapter.id ? 16 : 14,
-                            color: globalData.currentChapter == chapter.id ? Colors.black : Colors.grey),
+                            color: globalData.currentChapter == chapter.id ? Colors.black : Colors.grey, fontFamily: 'Raleway'),
                       ),
                     ),
                   ),
@@ -105,12 +103,12 @@ class _ChapterWidgetState extends State<ChapterWidget> {
     );
   }
 
-  Widget htmlTextWidget(String data) {
+  Widget htmlTextWidget() {
     return Container(
       child: Center(
         child: Card(
           child: Html(
-            data: data,
+            data: globalData.getChapterData(globalData.currentChapter),
             //Optional parameters:
             padding: EdgeInsets.all(8.0),
             backgroundColor: Colors.white70,
@@ -135,7 +133,7 @@ class _ChapterWidgetState extends State<ChapterWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             RaisedButton(
-              child: Text("Inapoi"),
+              child: Text("Inapoi", style: TextStyle(fontFamily: 'Raleway'),),
               textColor: Colors.black.withOpacity(0.6),
               color: globalData.currentChapter == 1 ? Colors.grey : Colors.blue.shade300,
               shape: new RoundedRectangleBorder(
@@ -163,15 +161,15 @@ class _ChapterWidgetState extends State<ChapterWidget> {
               },
             ),
             RaisedButton(
-              child: Text("Inainte"),
+              child: Text("Inainte", style: TextStyle(fontFamily: 'Raleway'),),
               textColor: Colors.black.withOpacity(0.6),
-              color: globalData.currentChapter == globalData.chapters[widget.chapter.title].length ? Colors.grey : Colors.blue.shade300,
+              color: globalData.currentChapter == globalData.matrici.length ? Colors.grey : Colors.blue.shade300,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
               ),
               onPressed: () {
                 setState(() {
-                  if(globalData.currentChapter < globalData.chapters.length) {
+                  if(globalData.currentChapter < globalData.matrici.length) {
                     globalData.currentChapter++;
                   }
                 });

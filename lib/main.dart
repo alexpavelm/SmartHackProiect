@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     getData();
     return MaterialApp(
-      title: 'SmartHack Proiect ',
+      title: 'SmartHack Project ',
       theme: new ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.white,
@@ -31,6 +31,7 @@ getData() async {
     var data = await Firestore.instance.collection("questions").getDocuments();
     globalData.questions = data.documents;
     var data2 = await Firestore.instance.collection("data/matematica/matrici").getDocuments();
-    globalData.chapters.putIfAbsent("matrici", () => data2.documents);
+    globalData.matrici = data2.documents;
+
   }
 }
