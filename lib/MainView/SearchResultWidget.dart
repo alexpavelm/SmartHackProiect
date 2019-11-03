@@ -27,7 +27,7 @@ class _SearchResultWidgetState extends State<SearchResultWidget> {
                 color: Colors.blue.shade300,
                 child: Center(child: Text("Rezultatele căutării", style: TextStyle(fontSize: 30, color: Colors.white),)),
           ),
-              TopicResultWidget(widget.searchResult.topicResult),
+              widget.searchResult.topicResult.materie == "" ? SizedBox.shrink() : TopicResultWidget(widget.searchResult.topicResult),
               Container(
                 height: 50,
                 child: Center(child: Text("Întrebări relevante:", style: TextStyle(fontSize: 20, color: Colors.grey),)),

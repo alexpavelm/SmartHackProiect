@@ -119,7 +119,7 @@ class _TopicResultWidgetState extends State<TopicResultWidget> {
                             style: TextStyle(
                                 fontFamily: "Raleway",
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25),
+                                fontSize: 25, color: Colors.black),
                           ),
                           Text(
                             "3 categorii",
